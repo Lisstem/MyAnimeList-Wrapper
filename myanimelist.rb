@@ -57,12 +57,11 @@ class MyAnimeList
     end
   end
 
-  # adds a manga to the readlist
+  # adds an anime to the watchlist
   # @param [Integer] id id of the anime on MyAnimeList.net
   # @param [Hash] data hash with the data of the read anime
-  #   The hash must contain the symbols in @anime_tags missing tags
-  #   missing values will be added as nil
-  #   some values must be present
+  #   The hash must contain some of the symbols in @anime_tags (i don't know which must)
+  #   not all values have to be present (i don't know which must)
   #   for further information check the MyAnimeList API site
   # @return [Object] the result of RestClient.post
   def add_anime(id, data)
@@ -73,9 +72,8 @@ class MyAnimeList
   # updates an anime on the watchlist
   # @param [Integer] id id of the anime on MyAnimeList.net
   # @param [Hash] data hash with the data of the read anime
-  #   The hash must contain the symbols in @anime_tags missing tags
-  #   missing values will be added as nil
-  #   some values must be present
+  #   The hash must contain some of the symbols in @anime_tags (i don't know which must)
+  #   not all values have to be present, (i don't know which must)
   #   for further information check the MyAnimeList API site
   # @return [Object] the result of RestClient.post
   def update_anime(id, data)
@@ -123,9 +121,8 @@ class MyAnimeList
   # adds a manga to the readlist
   # @param [Integer] id id of the manga on MyAnimeList.net
   # @param [Hash] data hash with the data of the read manga
-  #   The hash must contain the symbols in @manga_tags missing tags
-  #   missing values will be added as nil
-  #   some values must be present
+  #   The hash must contain some of the symbols in @manga_tags (i don't know which must)
+  #   not all values have to be present (i don't know which must)
   #   for further information check the MyAnimeList API site
   # @return [Object] the result of RestClient.post
   def add_manga(id, data)
@@ -136,9 +133,8 @@ class MyAnimeList
   # updates a manga on the readlist
   # @param [Integer] id id of the manga on MyAnimeList.net
   # @param [Hash] data hash with the data of the read manga
-  #   The hash must contain the symbols in @manga_tags missing tags
-  #   missing values will be added as nil
-  #   some values must be present
+  #   The hash must contain some of the symbols in @manga_tags (i don't know which must)
+  #   not all values have to be present (i don't know which must)
   #   for further information check the MyAnimeList API site
   # @return [Object] the result of RestClient.post
   def update_manga(id, data)
@@ -176,11 +172,14 @@ class MyAnimeList
     xml << "\n<entry>\n"
     tags.each do |tag|
       value = data[tag]
-      value = '' if value.nil?
-      value = value.join(',') if value.respond_to? :each
-      xml << "  <#{tag.to_s}>#{value}</#{tag.to_s}>\n"
+      unless value.nil?
+        value = value.join(',') if value.respond_to? :each
+        xml << "  <#{tag.to_s}>#{value.to_s}</#{tag.to_s}>\n"
+      end
     end
     xml << "</entry>"
+    puts xml
+    xml
   end
 
   # Parses the XML response to a Array of Hashes representing the animes
