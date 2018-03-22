@@ -26,11 +26,11 @@ end
 
 # searching for mangas
 search_string = 'Naruto'
-animes = list.search_manga(search_string)
+mangas = list.search_manga(search_string)
 
 # prints all mangas
 puts 'print all mangas'
-animes.each do |manga|
+mangas.each do |manga|
   puts "#{manga[:title]} (#{manga[:id]})
 \tEnglish title: #{manga[:english]}
 \tSynonyms:      #{manga[:synonyms].join(', ')}
@@ -51,7 +51,6 @@ data = {:episode =>10,
         :status => 'watching',
         :score =>7,
         :tags => 'test tag, 2nd tag'}
-puts MyAnimeList.anime_xml(data)
 # 28999 is the id of the anime on MyAnimeList.net
 puts 'adding anime'
 puts list.add_anime(28999, data)
