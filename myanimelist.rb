@@ -194,30 +194,30 @@ class MyAnimeList
     xml.each do |entry|
       anime = {}
       anime[:id] = entry['id'].to_i
-      anime[:title] = entry['title']
-      anime[:english] = entry['english']
+      anime[:title] = entry['title'].to_s
+      anime[:english] = entry['english'].to_s
       anime[:synonyms] = entry['synonyms']
       if anime[:synonyms].nil?
         anime[:synonyms] = []
       else
-        anime[:synonyms] = anime[:synonyms].split(';')
+        anime[:synonyms] = anime[:synonyms].to_s.split(';')
       end
       anime[:episodes] = entry['episodes'].to_i
       anime[:score] = entry['score'].to_f
-      anime[:type] = entry['type'].downcase.to_sym
-      anime[:status] = entry['status']
+      anime[:type] = entry['type'].to_s.downcase.to_sym
+      anime[:status] = entry['status'].to_s
       begin
-        anime[:start_date] = Date.parse(entry['start_date'])
+        anime[:start_date] = Date.parse(entry['start_date'].to_s)
       rescue ArgumentError
-        anime[:start_date] = entry['start_date']
+        anime[:start_date] = entry['start_date'].to_s
       end
       begin
-        anime[:end_date] = Date.parse(entry['end_date'])
+        anime[:end_date] = Date.parse(entry['end_date'].to_s)
       rescue ArgumentError
-        anime[:end_date] = entry['end_date']
+        anime[:end_date] = entry['end_date'].to_s
       end
-      anime[:synopsis] = entry['synopsis']
-      anime[:image] = entry['image']
+      anime[:synopsis] = entry['synopsis'].to_s
+      anime[:image] = entry['image'].to_s
       animes << anime
     end
     animes
@@ -236,30 +236,30 @@ class MyAnimeList
       manga = {}
       puts entry
       manga[:id] = entry['id'].to_i
-      manga[:title] = entry['title']
-      manga[:english] = entry['english']
+      manga[:title] = entry['title'].to_s
+      manga[:english] = entry['english'].to_s
       if manga[:synonyms].nil?
         manga[:synonyms] = []
       else
-        manga[:synonyms] = manga[:synonyms].split(';')
+        manga[:synonyms] = manga[:synonyms].to_s.split(';')
       end
       manga[:chapters] = entry['chapters'].to_i
       manga[:volumes] = entry['volumes'].to_i
       manga[:score] = entry['score'].to_f
       manga[:type] = entry['type'].downcase.to_sym
-      manga[:status] = entry['status']
+      manga[:status] = entry['status'].to_s
       begin
-        manga[:start_date] = Date.parse(entry['start_date'])
+        manga[:start_date] = Date.parse(entry['start_date'].to_s)
       rescue ArgumentError
-        manga[:start_date] = entry['start_date']
+        manga[:start_date] = entry['start_date'].to_s
       end
       begin
-        manga[:end_date] = Date.parse(entry['end_date'])
+        manga[:end_date] = Date.parse(entry['end_date'].to_s)
       rescue ArgumentError
-        manga[:end_date] = entry['end_date']
+        manga[:end_date] = entry['end_date'].to_s
       end
-      manga[:synopsis] = entry['synopsis']
-      manga[:image] = entry['image']
+      manga[:synopsis] = entry['synopsis'].to_s
+      manga[:image] = entry['image'].to_s
       mangas << manga
     end
     mangas
